@@ -2,6 +2,13 @@ import { Button } from "@/components/ui/button";
 import { BookOpen, Heart, Mail, MapPin, Phone } from "lucide-react";
 
 const Footer = () => {
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 py-16">
@@ -13,13 +20,13 @@ const Footer = () => {
                 <BookOpen className="w-6 h-6" />
               </div>
               <div>
-                <h3 className="text-xl font-bold">Ketabi</h3>
+                <h3 className="text-xl font-bold">Ketabi Studio</h3>
                 <p className="text-sm opacity-80">Islamic Children's Books</p>
               </div>
             </div>
             <p className="text-primary-foreground/80 mb-6 max-w-md">
-              Creating magical, personalized Islamic stories that inspire young hearts 
-              and minds with beautiful values and teachings.
+              Creating magical Islamic stories that inspire young hearts and minds with beautiful values and teachings. 
+              Join our subscription platform for families and authors worldwide.
             </p>
             <div className="flex gap-4">
               <Button variant="secondary" size="sm">
@@ -33,11 +40,11 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Quick Links</h4>
             <ul className="space-y-2 text-sm">
+              <li><a href="#" onClick={scrollToTop} className="opacity-80 hover:opacity-100 transition-opacity">Home</a></li>
               <li><a href="#books" className="opacity-80 hover:opacity-100 transition-opacity">Our Books</a></li>
-              <li><a href="#customize" className="opacity-80 hover:opacity-100 transition-opacity">Customize</a></li>
-              <li><a href="#authors" className="opacity-80 hover:opacity-100 transition-opacity">For Authors</a></li>
+              <li><a href="#publisher" className="opacity-80 hover:opacity-100 transition-opacity">Publisher</a></li>
               <li><a href="#about" className="opacity-80 hover:opacity-100 transition-opacity">About Us</a></li>
-              <li><a href="#" className="opacity-80 hover:opacity-100 transition-opacity">Contact</a></li>
+              <li><a href="#publisher" className="opacity-80 hover:opacity-100 transition-opacity">Subscribe</a></li>
             </ul>
           </div>
 
@@ -47,7 +54,7 @@ const Footer = () => {
             <div className="space-y-3 text-sm">
               <div className="flex items-center gap-2 opacity-80">
                 <Mail className="w-4 h-4" />
-                <span>hello@ketabi.com</span>
+                <span>hello@ketabistudio.com</span>
               </div>
               <div className="flex items-center gap-2 opacity-80">
                 <Phone className="w-4 h-4" />
@@ -64,7 +71,7 @@ const Footer = () => {
         {/* Bottom */}
         <div className="border-t border-primary-foreground/20 mt-12 pt-6 flex flex-col md:flex-row justify-between items-center">
           <p className="text-sm opacity-80">
-            © 2024 Ketabi. All rights reserved. Made with love for Muslim families.
+            © 2024 Ketabi Studio. All rights reserved. Made with love for Muslim families.
           </p>
           <div className="flex gap-6 text-sm mt-4 md:mt-0">
             <a href="#" className="opacity-80 hover:opacity-100 transition-opacity">Privacy Policy</a>

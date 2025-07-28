@@ -1,9 +1,30 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { BookOpen, Users, TrendingUp, Award, ArrowRight, Star, Heart } from "lucide-react";
+import ContactForm from "./ContactForm";
 
 const PublisherSection = () => {
+  const [showContactForm, setShowContactForm] = useState(false);
+  const [contactFormType, setContactFormType] = useState<'subscription' | 'author'>('subscription');
+  const [selectedPlan, setSelectedPlan] = useState<string>('');
+
+  const handleSubscriptionClick = (planName: string) => {
+    setContactFormType('subscription');
+    setSelectedPlan(planName);
+    setShowContactForm(true);
+  };
+
+  const handleAuthorClick = () => {
+    setContactFormType('author');
+    setShowContactForm(true);
+  };
+
+  const closeContactForm = () => {
+    setShowContactForm(false);
+  };
+
   const subscriptionPlans = [
     {
       name: "Family Plan",
@@ -107,6 +128,7 @@ const PublisherSection = () => {
                     variant={plan.popular ? "default" : "outline"} 
                     className="w-full"
                     size="lg"
+                    onClick={() => handleSubscriptionClick(plan.name)}
                   >
                     Start {plan.name}
                   </Button>
@@ -145,7 +167,7 @@ const PublisherSection = () => {
                 ))}
               </div>
               
-              <Button variant="magical" size="lg" className="w-full group">
+              <Button variant="magical" size="lg" className="w-full group" onClick={handleAuthorClick}>
                 Apply to Publish
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
@@ -154,17 +176,26 @@ const PublisherSection = () => {
             {/* Stats */}
             <div className="grid grid-cols-2 gap-4">
               <Card className="p-4 text-center">
-                <div className="text-2xl font-bold text-primary">Coming Soon</div>
+                <div className="text-2xl font-bold text-primary">Live Now</div>
                 <div className="text-sm text-muted-foreground">Author Platform</div>
               </Card>
               <Card className="p-4 text-center">
-                <div className="text-2xl font-bold text-primary">Launch 2024</div>
+                <div className="text-2xl font-bold text-primary">Available</div>
                 <div className="text-sm text-muted-foreground">Subscription Service</div>
               </Card>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Contact Form Modal */}
+      {showContactForm && (
+        <ContactForm
+          type={contactFormType}
+          planName={selectedPlan}
+          onClose={closeContactForm}
+        />
+      )}
     </section>
   );
 };
