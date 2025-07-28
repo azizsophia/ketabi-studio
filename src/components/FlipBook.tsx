@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, Play, Pause, RotateCcw } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Play, Pause, RotateCcw, X, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 
@@ -28,6 +28,7 @@ export const FlipBook: React.FC<FlipBookProps> = ({
   const [isFlipping, setIsFlipping] = useState(false);
   const [isAutoPlay, setIsAutoPlay] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [showCover, setShowCover] = useState(true);
   const autoPlayRef = useRef<NodeJS.Timeout>();
 
   const totalPages = pages.length;
@@ -53,6 +54,12 @@ export const FlipBook: React.FC<FlipBookProps> = ({
   const resetBook = () => {
     setCurrentPage(0);
     setIsAutoPlay(false);
+    setShowCover(true);
+  };
+
+  const startReading = () => {
+    setShowCover(false);
+    setCurrentPage(0);
   };
 
   useEffect(() => {
@@ -73,6 +80,8 @@ export const FlipBook: React.FC<FlipBookProps> = ({
 
   const openBook = () => {
     setIsOpen(true);
+    setShowCover(true);
+    setCurrentPage(0);
   };
 
   const closeBook = () => {
@@ -97,7 +106,10 @@ export const FlipBook: React.FC<FlipBookProps> = ({
           </div>
         </div>
         <div className="p-4">
-          <p className="text-sm text-muted-foreground">Click to read</p>
+          <Button className="w-full" variant="default">
+            <BookOpen className="w-4 h-4 mr-2" />
+            Read Now
+          </Button>
         </div>
       </Card>
     );
@@ -114,85 +126,108 @@ export const FlipBook: React.FC<FlipBookProps> = ({
               <p className="text-sm opacity-90">by {author}</p>
             </div>
             <Button variant="ghost" size="sm" onClick={closeBook} className="text-white hover:bg-white/20">
-              ✕
+              <X className="w-4 h-4" />
             </Button>
           </div>
         </div>
 
         {/* Book Content */}
         <div className="relative h-full pt-16">
-          {/* Page Display */}
-          <div className="relative h-full flex items-center justify-center">
-            <div className="relative w-full max-w-2xl h-[calc(100%-120px)] bg-gradient-to-br from-amber-50 to-orange-100 rounded-lg shadow-lg overflow-hidden">
-              {/* Page Content */}
-              <div className="absolute inset-0 p-8">
-                {pages[currentPage]?.image ? (
-                  <div className="h-full flex items-center justify-center">
-                    <img 
-                      src={pages[currentPage].image} 
-                      alt={`Page ${currentPage + 1}`}
-                      className="max-w-full max-h-full object-contain"
-                    />
-                  </div>
-                ) : (
-                  <div className="h-full flex flex-col justify-center">
-                    <div className="text-center mb-4">
-                      <span className="text-sm text-gray-500">Page {currentPage + 1} of {totalPages}</span>
-                    </div>
-                    <div className="text-lg leading-relaxed text-gray-800">
-                      {pages[currentPage]?.content || 'No content available for this page.'}
-                    </div>
-                  </div>
-                )}
-              </div>
-              
-              {/* Page Number */}
-              <div className="absolute bottom-4 right-4 text-sm text-gray-500">
-                {currentPage + 1} / {totalPages}
+          {showCover ? (
+            /* Cover Page */
+            <div className="relative h-full flex items-center justify-center">
+              <div className="relative w-full max-w-2xl h-[calc(100%-120px)] bg-gradient-to-br from-amber-50 to-orange-100 rounded-lg shadow-lg overflow-hidden">
+                <div className="absolute inset-0 p-8 flex flex-col items-center justify-center">
+                  <img 
+                    src={coverImage} 
+                    alt={title}
+                    className="max-w-full max-h-96 object-contain mb-6"
+                  />
+                  <h3 className="text-2xl font-bold text-gray-800 mb-2">{title}</h3>
+                  <p className="text-lg text-gray-600 mb-6">by {author}</p>
+                  <Button onClick={startReading} size="lg" className="px-8">
+                    <BookOpen className="w-5 h-5 mr-2" />
+                    Start Reading
+                  </Button>
+                </div>
               </div>
             </div>
-          </div>
+          ) : (
+            /* Story Pages */
+            <>
+              <div className="relative h-full flex items-center justify-center">
+                <div className="relative w-full max-w-2xl h-[calc(100%-120px)] bg-gradient-to-br from-amber-50 to-orange-100 rounded-lg shadow-lg overflow-hidden">
+                  {/* Page Content */}
+                  <div className="absolute inset-0 p-8">
+                    {pages[currentPage]?.image ? (
+                      <div className="h-full flex items-center justify-center">
+                        <img 
+                          src={pages[currentPage].image} 
+                          alt={`Page ${currentPage + 1}`}
+                          className="max-w-full max-h-full object-contain"
+                        />
+                      </div>
+                    ) : (
+                      <div className="h-full flex flex-col justify-center">
+                        <div className="text-center mb-4">
+                          <span className="text-sm text-gray-500">Page {currentPage + 1} of {totalPages}</span>
+                        </div>
+                        <div className="text-lg leading-relaxed text-gray-800">
+                          {pages[currentPage]?.content || 'No content available for this page.'}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Page Number */}
+                  <div className="absolute bottom-4 right-4 text-sm text-gray-500">
+                    {currentPage + 1} / {totalPages}
+                  </div>
+                </div>
+              </div>
 
-          {/* Navigation Controls */}
-          <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center gap-4">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => flipPage('prev')}
-              disabled={currentPage === 0 || isFlipping}
-              className="rounded-full w-10 h-10 p-0"
-            >
-              <ChevronLeft className="w-4 h-4" />
-            </Button>
+              {/* Navigation Controls */}
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center gap-4">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => flipPage('prev')}
+                  disabled={currentPage === 0 || isFlipping}
+                  className="rounded-full w-10 h-10 p-0"
+                >
+                  <ChevronLeft className="w-4 h-4" />
+                </Button>
 
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={toggleAutoPlay}
-              className="rounded-full w-10 h-10 p-0"
-            >
-              {isAutoPlay ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-            </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={toggleAutoPlay}
+                  className="rounded-full w-10 h-10 p-0"
+                >
+                  {isAutoPlay ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
+                </Button>
 
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={resetBook}
-              className="rounded-full w-10 h-10 p-0"
-            >
-              <RotateCcw className="w-4 h-4" />
-            </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={resetBook}
+                  className="rounded-full w-10 h-10 p-0"
+                >
+                  <RotateCcw className="w-4 h-4" />
+                </Button>
 
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => flipPage('next')}
-              disabled={currentPage === totalPages - 1 || isFlipping}
-              className="rounded-full w-10 h-10 p-0"
-            >
-              <ChevronRight className="w-4 h-4" />
-            </Button>
-          </div>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => flipPage('next')}
+                  disabled={currentPage === totalPages - 1 || isFlipping}
+                  className="rounded-full w-10 h-10 p-0"
+                >
+                  <ChevronRight className="w-4 h-4" />
+                </Button>
+              </div>
+            </>
+          )}
         </div>
 
         {/* Page Turn Animation Overlay */}

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Heart, Palette, BookOpen, Star, Download } from "lucide-react";
+import { Heart, BookOpen, Download } from "lucide-react";
 import { FlipBook } from "./FlipBook";
 import { books, Book } from "@/data/books";
 
@@ -72,16 +72,16 @@ const BooksShowcase = () => {
                 {/* Actions */}
                 <div className="flex gap-2">
                   <Button 
-                    variant="outline" 
+                    variant="default" 
                     size="sm" 
                     className="flex-1"
                     onClick={() => handleBookPreview(book)}
                   >
                     <BookOpen className="w-4 h-4 mr-1" />
-                    Read Now
+                    Read Story
                   </Button>
                   {book.pdfUrl && (
-                    <Button variant="outline" size="sm">
+                    <Button variant="outline" size="sm" title="Download PDF">
                       <Download className="w-4 h-4" />
                     </Button>
                   )}
