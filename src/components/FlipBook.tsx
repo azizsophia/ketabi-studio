@@ -27,7 +27,7 @@ export const FlipBook: React.FC<FlipBookProps> = ({
   const [currentPage, setCurrentPage] = useState(0);
   const [isFlipping, setIsFlipping] = useState(false);
   const [isAutoPlay, setIsAutoPlay] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true); // Automatically open when rendered
   const autoPlayRef = useRef<NodeJS.Timeout>();
 
   const totalPages = pages.length;
@@ -82,28 +82,9 @@ export const FlipBook: React.FC<FlipBookProps> = ({
     onClose?.();
   };
 
+  // Remove the card view - FlipBook should only show when opened
   if (!isOpen) {
-    return (
-      <Card className="relative group cursor-pointer overflow-hidden transition-all duration-500 hover:scale-105" onClick={openBook}>
-        <div className="relative">
-          <img 
-            src={coverImage} 
-            alt={title}
-            className="w-full h-64 object-cover rounded-t-lg"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-            <h3 className="text-lg font-bold">{title}</h3>
-            <p className="text-sm opacity-90">by {author}</p>
-          </div>
-        </div>
-        <div className="p-4">
-          <Button className="w-full" variant="default">
-            Read Story
-          </Button>
-        </div>
-      </Card>
-    );
+    return null;
   }
 
   const currentPageData = pages[currentPage];
