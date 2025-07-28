@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Heart, BookOpen, Download } from "lucide-react";
+import { Heart, BookOpen } from "lucide-react";
 import { FlipBook } from "./FlipBook";
 import { books, Book } from "@/data/books";
 
@@ -42,7 +42,7 @@ const BooksShowcase = () => {
                 <img 
                   src={book.coverImage}
                   alt={book.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-contain bg-gradient-to-br from-amber-50 to-orange-100 p-4"
                 />
                 <Badge className="absolute top-4 left-4 bg-golden-warm text-foreground">
                   <BookOpen className="w-3 h-3 mr-1" />
@@ -70,22 +70,15 @@ const BooksShowcase = () => {
                 <p className="text-muted-foreground mb-4 line-clamp-3">{book.description}</p>
 
                 {/* Actions */}
-                <div className="flex gap-2">
-                  <Button 
-                    variant="default" 
-                    size="sm" 
-                    className="flex-1"
-                    onClick={() => handleBookPreview(book)}
-                  >
-                    <BookOpen className="w-4 h-4 mr-1" />
-                    Read Story
-                  </Button>
-                  {book.pdfUrl && (
-                    <Button variant="outline" size="sm" title="Download PDF">
-                      <Download className="w-4 h-4" />
-                    </Button>
-                  )}
-                </div>
+                <Button 
+                  variant="default" 
+                  size="sm" 
+                  className="w-full"
+                  onClick={() => handleBookPreview(book)}
+                >
+                  <BookOpen className="w-4 h-4 mr-1" />
+                  Read Story
+                </Button>
               </div>
             </Card>
           ))}
