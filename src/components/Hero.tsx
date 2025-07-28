@@ -11,9 +11,9 @@ const Hero = () => {
       }}></div>
       
       <div className="relative container mx-auto px-4 py-20">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
           {/* Content */}
-          <div className="text-center lg:text-left">
+          <div className="text-center lg:text-left flex flex-col justify-center">
             <div className="inline-flex items-center gap-2 bg-nature-mist px-4 py-2 rounded-full mb-6">
               <Star className="w-4 h-4 text-golden-warm" />
               <span className="text-sm font-medium text-foreground">Beautiful Islamic Children's Books</span>
@@ -50,14 +50,14 @@ const Hero = () => {
                 <div className="text-sm text-muted-foreground">Islamic Values</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl font-bold text-primary">Ages 4-9</div>
-                <div className="text-sm text-muted-foreground">Perfect for Children</div>
+                <div className="text-2xl font-bold text-primary">Ages 1-16</div>
+                <div className="text-sm text-muted-foreground">For All Children</div>
               </div>
             </div>
           </div>
           
           {/* Book Preview */}
-          <div className="relative">
+          <div className="relative flex items-center justify-center">
             <div className="relative">
               {/* Main book mockup */}
               <Card className="p-8 bg-card shadow-book transform hover:rotate-2 transition-transform duration-500 animate-float-gentle">

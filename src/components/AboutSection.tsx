@@ -83,16 +83,16 @@ const AboutSection = () => {
                   <div className="text-xs text-muted-foreground">Islamic Values</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-xl font-bold text-primary">Ages 4-9</div>
-                  <div className="text-xs text-muted-foreground">Perfect for Children</div>
+                  <div className="text-xl font-bold text-primary">Ages 1-16</div>
+                  <div className="text-xs text-muted-foreground">For All Children</div>
                 </div>
                 <div className="text-center">
                   <div className="text-xl font-bold text-primary">Beautiful</div>
                   <div className="text-xs text-muted-foreground">Illustrations</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-xl font-bold text-primary">Family</div>
-                  <div className="text-xs text-muted-foreground">Focused</div>
+                  <div className="text-xl font-bold text-primary">Publisher</div>
+                  <div className="text-xs text-muted-foreground">Platform</div>
                 </div>
               </div>
             </Card>
