@@ -1,31 +1,21 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Heart, Palette, BookOpen, Star } from "lucide-react";
+import { Heart, Palette, BookOpen, Star, Download } from "lucide-react";
+import { FlipBook } from "./FlipBook";
+import { books, Book } from "@/data/books";
 
 const BooksShowcase = () => {
-  const books = [
-    {
-      id: 1,
-      title: "My Islamic Adventure",
-      description: "A personalized journey where your child learns beautiful Islamic values through exciting adventures.",
-      image: "/lovable-uploads/368c4389-ea15-48d5-91e9-081e76d7509c.png",
-      customizable: true,
-      price: "$24.99",
-      rating: 4.9,
-      features: ["Custom Name", "Skin Tone Options", "Hair & Eye Colors", "Islamic Values"]
-    },
-    {
-      id: 2,
-      title: "Stories from the Garden",
-      description: "Beautiful tales of friendship, kindness, and Islamic teachings set in magical garden settings.",
-      image: "/lovable-uploads/51c80f0c-cf81-4a33-b684-477ad3aeb4b5.png",
-      customizable: false,
-      price: "$19.99",
-      rating: 4.8,
-      features: ["Islamic Stories", "Beautiful Illustrations", "Moral Lessons", "Age 3-8"]
-    }
-  ];
+  const [selectedBook, setSelectedBook] = useState<Book | null>(null);
+
+  const handleBookPreview = (book: Book) => {
+    setSelectedBook(book);
+  };
+
+  const handleCloseBook = () => {
+    setSelectedBook(null);
+  };
 
   return (
     <section id="books" className="py-20 bg-background">
@@ -44,22 +34,20 @@ const BooksShowcase = () => {
         </div>
 
         {/* Books Grid */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {books.map((book) => (
             <Card key={book.id} className="group overflow-hidden hover:shadow-book transition-all duration-500 transform hover:-translate-y-2">
               {/* Book Image */}
               <div className="relative h-80 overflow-hidden">
                 <img 
-                  src={book.image}
+                  src={book.coverImage}
                   alt={book.title}
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                {book.customizable && (
-                  <Badge className="absolute top-4 left-4 bg-golden-warm text-foreground">
-                    <Palette className="w-3 h-3 mr-1" />
-                    Customizable
-                  </Badge>
-                )}
+                <Badge className="absolute top-4 left-4 bg-golden-warm text-foreground">
+                  <BookOpen className="w-3 h-3 mr-1" />
+                  {book.category}
+                </Badge>
                 <Button 
                   variant="ghost" 
                   size="icon"
@@ -72,41 +60,31 @@ const BooksShowcase = () => {
               {/* Book Content */}
               <div className="p-6">
                 <div className="flex items-center gap-2 mb-2">
-                  <div className="flex items-center">
-                    {[...Array(5)].map((_, i) => (
-                      <Star 
-                        key={i} 
-                        className={`w-4 h-4 ${i < Math.floor(book.rating) ? 'text-golden-warm fill-current' : 'text-muted-foreground'}`} 
-                      />
-                    ))}
-                  </div>
-                  <span className="text-sm text-muted-foreground">({book.rating})</span>
+                  <Badge variant="secondary" className="text-xs">
+                    {book.ageGroup}
+                  </Badge>
                 </div>
 
                 <h3 className="text-xl font-bold text-foreground mb-2">{book.title}</h3>
-                <p className="text-muted-foreground mb-4">{book.description}</p>
+                <p className="text-sm text-muted-foreground mb-2">by {book.author}</p>
+                <p className="text-muted-foreground mb-4 line-clamp-3">{book.description}</p>
 
-                {/* Features */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {book.features.map((feature) => (
-                    <Badge key={feature} variant="secondary" className="text-xs">
-                      {feature}
-                    </Badge>
-                  ))}
-                </div>
-
-                {/* Price and Actions */}
-                <div className="flex items-center justify-between">
-                  <div className="text-2xl font-bold text-primary">{book.price}</div>
-                  <div className="flex gap-2">
+                {/* Actions */}
+                <div className="flex gap-2">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="flex-1"
+                    onClick={() => handleBookPreview(book)}
+                  >
+                    <BookOpen className="w-4 h-4 mr-1" />
+                    Read Now
+                  </Button>
+                  {book.pdfUrl && (
                     <Button variant="outline" size="sm">
-                      <BookOpen className="w-4 h-4 mr-1" />
-                      Preview
+                      <Download className="w-4 h-4" />
                     </Button>
-                    <Button variant={book.customizable ? "magical" : "default"} size="sm">
-                      {book.customizable ? "Customize" : "Order Now"}
-                    </Button>
-                  </div>
+                  )}
                 </div>
               </div>
             </Card>
@@ -119,6 +97,17 @@ const BooksShowcase = () => {
             View All Books
           </Button>
         </div>
+
+        {/* FlipBook Modal */}
+        {selectedBook && (
+          <FlipBook
+            pages={selectedBook.pages}
+            title={selectedBook.title}
+            author={selectedBook.author}
+            coverImage={selectedBook.coverImage}
+            onClose={handleCloseBook}
+          />
+        )}
       </div>
     </section>
   );
