@@ -20,7 +20,7 @@ export const books: Book[] = [
   {
     id: "juha-pumpkin",
     title: "Juha and the Enormous Pumpkin",
-    author: "Fatima Al-Zahra",
+    author: "Ketabi Studio Original Book",
     coverImage: "/books/juha-pumpkin-cover.svg",
     description: "A delightful story about Juha and his adventures with an enormous pumpkin that teaches children about patience, creativity, and the value of helping others.",
     category: "Adventure",
@@ -82,7 +82,7 @@ export const books: Book[] = [
   {
     id: "sarah-mosque",
     title: "Sarah's First Visit to the Mosque",
-    author: "Amina Hassan",
+    author: "Ketabi Studio Original Book",
     coverImage: "/books/sarah-mosque-cover.svg",
     description: "Join Sarah as she experiences her first visit to the mosque with her family, learning about prayer, community, and the beauty of Islamic traditions.",
     category: "Educational",
@@ -143,7 +143,7 @@ export const books: Book[] = [
   {
     id: "omar-ramadan",
     title: "Omar's Ramadan Adventure",
-    author: "Khalid Ahmed",
+    author: "Ketabi Studio Original Book",
     coverImage: "/books/omar-ramadan-cover.svg",
     description: "Follow Omar as he learns about fasting, prayer, and the spirit of giving during the holy month of Ramadan.",
     category: "Religious",

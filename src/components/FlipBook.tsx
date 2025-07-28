@@ -106,6 +106,8 @@ export const FlipBook: React.FC<FlipBookProps> = ({
     );
   }
 
+  const currentPageData = pages[currentPage];
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80">
       <div className="relative w-full max-w-4xl h-[80vh] bg-white rounded-lg shadow-2xl overflow-hidden">
@@ -128,12 +130,16 @@ export const FlipBook: React.FC<FlipBookProps> = ({
             <div className="relative w-full max-w-2xl h-[calc(100%-120px)] bg-gradient-to-br from-amber-50 to-orange-100 rounded-lg shadow-lg overflow-hidden">
               {/* Page Content */}
               <div className="absolute inset-0 p-8">
-                {pages[currentPage]?.image ? (
+                {currentPageData?.image ? (
                   <div className="h-full flex items-center justify-center">
                     <img 
-                      src={pages[currentPage].image} 
+                      src={currentPageData.image} 
                       alt={`Page ${currentPage + 1}`}
                       className="max-w-full max-h-full object-contain"
+                      onError={(e) => {
+                        console.error('Image failed to load:', currentPageData.image);
+                        e.currentTarget.style.display = 'none';
+                      }}
                     />
                   </div>
                 ) : (
@@ -142,7 +148,7 @@ export const FlipBook: React.FC<FlipBookProps> = ({
                       <span className="text-sm text-gray-500">Page {currentPage + 1} of {totalPages}</span>
                     </div>
                     <div className="text-lg leading-relaxed text-gray-800">
-                      {pages[currentPage]?.content || 'No content available for this page.'}
+                      {currentPageData?.content || 'No content available for this page.'}
                     </div>
                   </div>
                 )}
