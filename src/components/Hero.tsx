@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { ArrowRight, Star, Users } from "lucide-react";
+import { ArrowRight, Star, BookOpen } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -16,7 +16,7 @@ const Hero = () => {
           <div className="text-center lg:text-left">
             <div className="inline-flex items-center gap-2 bg-nature-mist px-4 py-2 rounded-full mb-6">
               <Star className="w-4 h-4 text-golden-warm" />
-              <span className="text-sm font-medium text-foreground">Personalized Islamic Stories</span>
+              <span className="text-sm font-medium text-foreground">Beautiful Islamic Children's Books</span>
             </div>
             
             <h1 className="text-4xl md:text-6xl font-bold text-foreground leading-tight mb-6">
@@ -25,33 +25,33 @@ const Hero = () => {
             </h1>
             
             <p className="text-lg text-muted-foreground mb-8 max-w-xl">
-              Create personalized Islamic children's books where your child becomes the hero of their own adventure. 
-              Customize appearance, name, and watch them grow with beautiful Islamic values.
+              Discover our collection of beautifully illustrated Islamic children's books that teach valuable lessons, 
+              celebrate Islamic values, and create lasting memories for your family.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
               <Button variant="magical" size="lg" className="group">
-                Create Your Book
+                Explore Our Books
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button variant="outline" size="lg">
-                View Sample Pages
+                Learn About Us
               </Button>
             </div>
             
             {/* Stats */}
             <div className="flex flex-wrap gap-8 justify-center lg:justify-start">
               <div className="text-center">
-                <div className="text-2xl font-bold text-primary">1,000+</div>
-                <div className="text-sm text-muted-foreground">Happy Families</div>
-              </div>
-              <div className="text-center">
-                <div className="text-2xl font-bold text-primary">50+</div>
-                <div className="text-sm text-muted-foreground">Customization Options</div>
+                <div className="text-2xl font-bold text-primary">3</div>
+                <div className="text-sm text-muted-foreground">Beautiful Stories</div>
               </div>
               <div className="text-center">
                 <div className="text-2xl font-bold text-primary">100%</div>
                 <div className="text-sm text-muted-foreground">Islamic Values</div>
+              </div>
+              <div className="text-center">
+                <div className="text-2xl font-bold text-primary">Ages 4-9</div>
+                <div className="text-sm text-muted-foreground">Perfect for Children</div>
               </div>
             </div>
           </div>
@@ -62,21 +62,21 @@ const Hero = () => {
               {/* Main book mockup */}
               <Card className="p-8 bg-card shadow-book transform hover:rotate-2 transition-transform duration-500 animate-float-gentle">
                 <img 
-                  src="/lovable-uploads/110addfc-839d-4c3b-987a-8931aab81ea1.png"
-                  alt="Child reading in magical forest"
+                  src="/books/juha-pumpkin-cover.svg"
+                  alt="Juha and the Enormous Pumpkin"
                   className="w-full rounded-lg shadow-story"
                 />
                 <div className="mt-4 text-center">
-                  <h3 className="font-semibold text-foreground">{"Your Child's"} Islamic Adventure</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Personalized just for them</p>
+                  <h3 className="font-semibold text-foreground">Juha and the Enormous Pumpkin</h3>
+                  <p className="text-sm text-muted-foreground mt-1">A delightful story about sharing and community</p>
                 </div>
               </Card>
               
-              {/* Floating customization preview */}
+              {/* Floating book preview */}
               <div className="absolute -right-4 -bottom-4 bg-golden-light p-4 rounded-xl shadow-story animate-float-gentle" style={{animationDelay: '1s'}}>
                 <div className="flex items-center gap-2">
-                  <Users className="w-4 h-4 text-foreground" />
-                  <span className="text-sm font-medium text-foreground">Choose skin tone, hair & eyes</span>
+                  <BookOpen className="w-4 h-4 text-foreground" />
+                  <span className="text-sm font-medium text-foreground">Read stories online</span>
                 </div>
               </div>
             </div>

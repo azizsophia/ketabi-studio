@@ -22,12 +22,6 @@ const Header = () => {
             <a href="#books" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               Our Books
             </a>
-            <a href="#customize" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              Customize
-            </a>
-            <a href="#authors" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              For Authors
-            </a>
             <a href="#about" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
               About
             </a>

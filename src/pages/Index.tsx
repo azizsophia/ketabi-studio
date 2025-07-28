@@ -1,8 +1,7 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import BooksShowcase from "@/components/BooksShowcase";
-import CustomizationSection from "@/components/CustomizationSection";
-import AuthorsSection from "@/components/AuthorsSection";
+import AboutSection from "@/components/AboutSection";
 import Footer from "@/components/Footer";
 
 const Index = () => {
@@ -11,8 +10,7 @@ const Index = () => {
       <Header />
       <Hero />
       <BooksShowcase />
-      <CustomizationSection />
-      <AuthorsSection />
+      <AboutSection />
       <Footer />
     </div>
   );
